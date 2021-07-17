@@ -6,8 +6,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vida de Programador</title>
   <link rel="stylesheet" href="css/style.css">
+
+  <link rel="shortcut icon" href="imgs/icon-128.png">
+  <link rel="apple-touch-icon" href="imgs/icon-apple.png">
+  <link rel="manifest" href="manifest.json">
+
 </head>
 <body>
+
+  <header>
+    <img src="imgs/logo.png" alt="Vida de Programador" title="Vida de Programador">
+  </header>
   
+  <main id="tirinhas">
+
+  </main>
+
+  <script src="js/tirinhas.js"></script>
+  <script>
+    //verificar se tem suporte a sw
+    if('serviceWorker' in navigator){
+      //registrar o sw em um escopo
+      navigator.serviceWorker.register("sw.js", {scope: '/aulapos/'})
+      .then(function(register){
+        //verificar o que esta sendo feito
+        if(register.installing){
+          console.log('Instalado com sucesso')
+        }else if(register.waiting){
+          console.log('Sw em espera')
+        }else if(register.active){
+          console.log('SW ativo')
+        }
+        console.log('SW registrado no escopo: '+register.scope);
+      })
+      .catch(function(error){
+        console.log('Erro ao registrar '+error);
+      })
+    }else{
+      alert ('Atualize seu navegador!')
+    }
+  </script>
 </body>
 </html>
