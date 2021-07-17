@@ -18,16 +18,22 @@
     <img src="imgs/logo.png" alt="Vida de Programador" title="Vida de Programador">
   </header>
   
-  <main id="tirinhas">
+  <div id="alert">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+    <button type="button" class="btn" id="btnAdd">ADD a Tela</button>
+    <button type="button" class="btn" id="btnCancel">Fechar</button>
+  </div>
 
+  <main id="tirinhas">
   </main>
 
   <script src="js/tirinhas.js"></script>
+  <script src="js/funcoes.js"></script>
   <script>
     //verificar se tem suporte a sw
     if('serviceWorker' in navigator){
       //registrar o sw em um escopo
-      navigator.serviceWorker.register("sw.js", {scope: '/aulapos/'})
+      navigator.serviceWorker.register("sw.js", {scope: '/'})
       .then(function(register){
         //verificar o que esta sendo feito
         if(register.installing){

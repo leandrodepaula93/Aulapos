@@ -29,3 +29,22 @@ this.addEventListener('install', function(event){
     await cache.add(new Request(OFFLINE_URL, {cache: "reload"}));
   })());
 })
+
+this.addEventListener('fetch', function(event){
+  console.log("entrou no fetch");
+
+  //primeiro buscar na rede - devolve o cache
+  event.respondWith(
+    caches.match(event.request)
+    .then(response => {
+      console.log("retorna a resposta da rede...")
+      //retornar resposta da rede ou do cache
+      return response || fetch(event.request)
+    })
+    .catch(() => {
+      console.log("retornar offline")
+      //mostrar URL_OFFLINE
+      return caches.match(OFFLINE_URL);
+    })
+  )
+})
