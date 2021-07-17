@@ -19,4 +19,13 @@ this.addEventListener('install', function(event){
     })
   )
   console.log("Arquivos em cache");
+
+  //add a URL_OFFLINE para ser executada qdo nao tiver rede
+  event.waitUntil((async () => {
+    console.log("URL Offline pronta")
+    //abrir o cache
+    const cache = await caches.open(CACHE_NAME);
+    //extrair a URL OFFLINE
+    await cache.add(new Request(OFFLINE_URL, {cache: "reload"}));
+  })());
 })
